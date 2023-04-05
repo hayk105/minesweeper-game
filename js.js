@@ -22,8 +22,23 @@ function start(){
 	for (var i = 0; i < ivalue; i++) {
 		$("table").append(`<tr class="${i}"></tr>`)
 		for (var i2 = 0; i2 < i2value; i2++) {
-			$(`.${i}`).append(`<td class="${i}x${i2}"></td>`)
+			$(`.${i}`).append(`<td class="${i}x${i2}"><button class="${i}y${i2} true"></button></td>`)
 		}
 	}
 }
 start()
+
+//		rigth click
+
+// window.oncontextmenu = (e) => {
+//   e.preventDefault()
+// }
+window.oncontextmenu = (e) => {
+	e.preventDefault()
+	if (e.target.className.split(" ")[1] == "true") {
+		$(`.${(e.target.className.split(" ")[0]).replace("y", "x")}`).html(`<img src='flag.png' alt='' class='${e.target.className.split(" ")[0]} false'>`)
+	}
+	else{
+		$(`.${(e.target.className.split(" ")[0]).replace("y", "x")}`).html(`<button class='${e.target.className.split(" ")[0]} true'></button>`)
+	}
+}
