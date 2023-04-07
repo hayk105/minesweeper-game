@@ -167,5 +167,18 @@ $("td button").click(function(e){
 	else{
 		$(`.${e.currentTarget.className.replace("y", "x")}`).html(map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]])
 		$(`.${e.currentTarget.className}`).hide()
+		if ($(`.${e.currentTarget.className.replace("y", "x")}`).html() == "💣") {
+			for (var i = 0; i < map.length; i++) {
+				for (var i2 = 0; i2 < map[0].length; i2++) {
+					if (map[i][i2] == "💣") {
+						// $(`.${i}x${i2}`).html(map[i][i2])
+						// $(`.${i}x${i2}`).hide()
+						$(`.${i}x${i2}`).html("💣")
+						// $(`.${i}x${i2}`).hide()
+					}
+				}
+			}
+			alert("game over")
+		}
 	}
 })
