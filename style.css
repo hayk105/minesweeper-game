@@ -1,6 +1,7 @@
 *{
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 table{
 	width: 500px;
@@ -17,16 +18,18 @@ tr,td{
 	width: 10px;
 	height: 10px;
 	border: 1px solid black;
+	border: initial;
 	box-sizing: border-box;
 	position: relative;
 }
-
+td{
+	text-align: center;
+	border: 1px solid black;
+}
 td button{
 	width: 100%;
 	height: 100%;
 }
-img{
-	position: absolute;
-	top: 0px;
-	width: 100%;
+button{
+	font-size: 30px;
 }
