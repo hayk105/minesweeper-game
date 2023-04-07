@@ -129,6 +129,54 @@ function number_generate(){
 	console.log(map)
 }
 
+//empty clear
+function empty(a, a2){
+	if (map[a][a2] == "") {
+		$(`.${a}y${a2}`).hide()
+		try {
+			if (map[a][a2 + 1] == "") {
+				$(`.${a}y${a2 + 1}`).hide()
+			}
+		}
+		catch{}
+		try {
+			if (map[a - 1][a2] == "") {
+				$(`.${a - 1}y${a2}`).hide()
+			}
+		}
+		catch{}
+		try {
+			if (map[a + 1][a2] == "") {
+				$(`.${a + 1}y${a2}`).hide()
+			}
+		}
+		catch{}
+		try {
+			if (map[a - 1][a2 - 1] == "") {
+				$(`.${a - 1}y${a2 - 1}`).hide()
+			}
+		}
+		catch{}
+		try {
+			if (map[a - 1][a2 + 1] == "") {
+				$(`.${a - 1}y${a2 + 1}`).hide()
+			}
+		}
+		catch{}
+		try {
+			if (map[a + 1][a2 - 1] == "") {
+				$(`.${a + 1}y${a2 - 1}`).hide()
+			}
+		}
+		catch{}
+		try {
+			if (map[a + 1][a2 + 1] == "") {
+				$(`.${a + 1}y${a2 + 1}`).hide()
+			}
+		}
+		catch{}
+	}
+}
 
 
 
@@ -150,6 +198,9 @@ $("td button").click(function(e){
 			text = `${(e.currentTarget.className).split("y")[0]}y${(e.currentTarget.className).split("y")[1] - i}`
 
 			if (map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i] != "💣") {
+				if (map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i] == "") {
+					empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
+				}
 				$(`.${text}`).hide()
 				$(`.${text.replace("y", "x")}`).html((map[text.split("y")[0]][text.split("y")[1]]))
 			}
@@ -158,6 +209,9 @@ $("td button").click(function(e){
 			text = `${(e.currentTarget.className).split("y")[0] - 1}y${(e.currentTarget.className).split("y")[1] - i}`
 
 			if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] != "💣") {
+				if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] == "") {
+					empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
+				}
 				$(`.${text}`).hide()
 				$(`.${text.replace("y", "x")}`).html(map[text.split("y")[0]][text.split("y")[1]])
 			}
@@ -165,16 +219,18 @@ $("td button").click(function(e){
 		}
 	}
 	else{
-		$(`.${e.currentTarget.className.replace("y", "x")}`).html(map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]])
-		$(`.${e.currentTarget.className}`).hide()
+		if (map[Number(e.currentTarget.className.split("y")[0])][Number(e.currentTarget.className.split("y")[1])] == "") {
+			empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
+		}
+		else{
+			$(`.${e.currentTarget.className.replace("y", "x")}`).html(map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]])
+			$(`.${e.currentTarget.className}`).hide()
+		}
 		if ($(`.${e.currentTarget.className.replace("y", "x")}`).html() == "💣") {
 			for (var i = 0; i < map.length; i++) {
 				for (var i2 = 0; i2 < map[0].length; i2++) {
 					if (map[i][i2] == "💣") {
-						// $(`.${i}x${i2}`).html(map[i][i2])
-						// $(`.${i}x${i2}`).hide()
 						$(`.${i}x${i2}`).html("💣")
-						// $(`.${i}x${i2}`).hide()
 					}
 				}
 			}
