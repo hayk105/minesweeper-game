@@ -2,6 +2,7 @@
 
 var level = "easy"
 function start(){
+	$("#faces").removeClass("die_smile")
 	var ivalue = 0
 	var i2value = 0
 	var bomblength = 0
@@ -279,6 +280,7 @@ function update(){
 						}
 					}
 					alert("game over")
+					$("#faces").addClass("die_smile")
 					stop_game = true
 				}
 			}
@@ -301,6 +303,24 @@ function update(){
 			}
 		}
 	}
-}
+	}
+	$("#faces").on("mousedown", function(e){
+		$(this).addClass("click_smile")
+	})
+	$("#faces").on("mouseout", function(e){
+		$(this).removeClass("click_smile")
+	})
+	$("#faces").on("mouseup", function(e){
+		$(this).removeClass("click_smile")
+	})
+	$("button").on("mousedown", function(e){
+		$("#faces").addClass("hmm_smile")
+	})
+	$("button").on("mouseout", function(e){
+		$("#faces").removeClass("hmm_smile")
+	})
+	$("button").on("mouseup", function(e){
+		$("#faces").removeClass("hmm_smile")
+	})
 }
 start()
