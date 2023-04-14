@@ -1,4 +1,3 @@
-// open with chrome
 //BETA
 
 var level = "easy"
