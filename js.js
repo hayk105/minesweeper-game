@@ -287,19 +287,20 @@ function update(){
 		stugel_haxtec()
 	})
 	function stugel_haxtec(){
-		for (var i = 0; i < $("button").length; i++) {
-			try{
-				if (map[(($("button")[i].className).split("y")[0])][(($("button")[i].className).split("y")[1])] != "💣"){
-					return ""
+		if (arajin != 0) {
+			for (var i = 0; i < $("button").length; i++) {
+				try{
+					if (map[(($("button")[i].className).split("y")[0])][(($("button")[i].className).split("y")[1])] != "💣"){
+						return ""
+					}
 				}
+				catch{}
 			}
-			catch{}
+			if (stop_game == false) {
+				alert("You win😁")
+				stop_game = true
+			}
 		}
-		if (stop_game == false) {
-			alert("You win😁")
-			stop_game = true
-		}
-		console.log("stugec")
 	}
 }
 }
