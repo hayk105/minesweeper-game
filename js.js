@@ -1,14 +1,15 @@
-var level = "easy"
-var ivalue = 0
-var i2value = 0
-var bomblength = 0
-var arajin = 0
-var no_spam = []
-var ok = 0
-var stop_game = false
+// open with chrome
+//BETA
 
+var level = "hard"
 function start(){
-	stop_game = false
+	var ivalue = 0
+	var i2value = 0
+	var bomblength = 0
+	var arajin = 0
+	var no_spam = []
+	var ok = 0
+	var stop_game = false
 	$("table").html("")
 	if (level == "easy") {
 		ivalue = 8
@@ -28,12 +29,10 @@ function start(){
 	for (var i = 0; i < ivalue; i++) {
 		$("table").append(`<tr class="${i}"></tr>`)
 		for (var i2 = 0; i2 < i2value; i2++) {
-			$(`.${i}`).append(`<td class="${i}x${i2} ${level == 'easy'?'td_easy': level == "medium" ? 'td_medium' :''}"><button class="${i}y${i2}"><p>&#10240;&#10240;</p></button></td>`)
+			$(`.${i}`).append(`<td class="${i}x${i2} ${level == 'easy'?'td_easy': level == "medium" ? 'td_medium' :''}"><button class="${i}y${i2}"><p>&#10240;</p></button></td>`)
 		}
 	}
 	update()
-}
-start()
 
 function update(){
 	//		rigth click
@@ -57,7 +56,7 @@ function update(){
 				else if(e.target.localName != "td"){
 					e.srcElement.innerHTML = "&#10240;&#10240;"
 				}
-				bomblength--
+				// bomblength--
 			}
 		}
 	}
@@ -150,7 +149,6 @@ function update(){
 
 	//empty clear
 	function empty(a, a2){
-		// console.log(empty_arr)
 		try{
 			if (map[a][a2] == "") {
 				$(`.${a}y${a2}`).hide()
@@ -159,7 +157,6 @@ function update(){
 					if (map[a][a2 + 1] == "") {
 						$(`.${a}y${a2 + 1}`).hide()
 						$(`.${a}x${a2 + 1}`).html(`<p class="${level == 'easy'?'easy_p':''}"></p>`)
-
 					}
 				}
 				catch{}
@@ -289,9 +286,6 @@ function update(){
 		}
 		stugel_haxtec()
 	})
-
-
-
 	function stugel_haxtec(){
 		for (var i = 0; i < $("button").length; i++) {
 			try{
@@ -308,3 +302,5 @@ function update(){
 		console.log("stugec")
 	}
 }
+}
+start()
