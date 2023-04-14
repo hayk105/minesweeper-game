@@ -1,7 +1,7 @@
 // open with chrome
 //BETA
 
-var level = "medium"
+var level = "easy"
 function start(){
 	var ivalue = 0
 	var i2value = 0

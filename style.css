@@ -5,7 +5,7 @@
 	box-sizing: border-box;
 }
 table{
-	width: 500px;
+	width: 500.2px;
 	height: 500px;
 	border: 1px solid black;
 	border-collapse: collapse;
@@ -55,9 +55,6 @@ td button{
 	padding: 0;
     font-size: 13px;
 }
-.td_medium button p{
-	padding: 0%;
-}
 .td_easy{
 	width: 49.81px;
     height: 63px;
@@ -95,6 +92,11 @@ td button{
 .color_8{
 	color: gray;
 }
-td p{
+td > p{
 	padding: 35%;
+}
+@supports (-ms-ime-align:auto) {
+    selector {
+        property: value;
+    }
 }
