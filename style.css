@@ -50,8 +50,14 @@ td button{
 .td_easy button p{
 	margin: 10px;
 }
-
-
+.td_hard button p{
+	margin: 0px;
+	padding: 0;
+    font-size: 13px;
+}
+.td_medium button p{
+	padding: 0%;
+}
 .td_easy{
 	width: 49.81px;
     height: 63px;
@@ -63,4 +69,32 @@ td button{
 .td_hard{
 	width: 20.75px;
     height: 25px;
+    font-size: 11px;
+}
+.color_1{
+	color: blue;
+}
+.color_2{
+	color: green;
+}
+.color_3{
+	color: red;
+}
+.color_4{
+	color: purple;
+}
+.color_5{
+	color: maroon;
+}
+.color_6{
+	color: turquoise;
+}
+.color_7{
+	color: black;
+}
+.color_8{
+	color: gray;
+}
+td p{
+	padding: 35%;
 }

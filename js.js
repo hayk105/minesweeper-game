@@ -1,7 +1,7 @@
 // open with chrome
 //BETA
 
-var level = "easy"
+var level = "medium"
 function start(){
 	var ivalue = 0
 	var i2value = 0
@@ -29,7 +29,7 @@ function start(){
 	for (var i = 0; i < ivalue; i++) {
 		$("table").append(`<tr class="${i}"></tr>`)
 		for (var i2 = 0; i2 < i2value; i2++) {
-			$(`.${i}`).append(`<td class="${i}x${i2} ${level == 'easy'?'td_easy': level == "medium" ? 'td_medium' : level == "hard"? "td_hard" : ''}"><button class="${i}y${i2}"><p>&#10240;</p></button></td>`)
+			$(`.${i}`).append(`<td class="${i}x${i2} ${level == 'easy'?'td_easy': level == "medium" ? 'td_medium' : level == "hard"? "td_hard" : ''}"><button class="${i}y${i2}"><p></p></button></td>`)
 		}
 	}
 	update()
@@ -51,10 +51,10 @@ function update(){
 			else{
 
 				if (e.srcElement.innerHTML[0] == "<") {
-					$(`.${e.target.className}`).children("p").html("&#10240;&#10240;")
+					$(`.${e.target.className}`).children("p").html("")
 				}
 				else if(e.target.localName != "td"){
-					e.srcElement.innerHTML = "&#10240;&#10240;"
+					e.srcElement.innerHTML = ""
 				}
 				// bomblength--
 			}
@@ -152,53 +152,53 @@ function update(){
 		try{
 			if (map[a][a2] == "") {
 				$(`.${a}y${a2}`).hide()
-				$(`.${a}x${a2}`).html(`<p class="${level == 'easy'?'easy_p':''}"></p>`)
+				$(`.${a}x${a2}`).html(`<p></p>`)
 				try {
 					if (map[a][a2 + 1] == "") {
 						$(`.${a}y${a2 + 1}`).hide()
-						$(`.${a}x${a2 + 1}`).html(`<p class="${level == 'easy'?'easy_p':''}"></p>`)
+						$(`.${a}x${a2 + 1}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
 					if (map[a - 1][a2] == "") {
 						$(`.${a - 1}y${a2}`).hide()
-						$(`.${a - 1}x${a2}`).html(`<p class="${level == 'easy'?'easy_p':''}"></p>`)
+						$(`.${a - 1}x${a2}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
 					if (map[a + 1][a2] == "") {
 						$(`.${a + 1}y${a2}`).hide()
-						$(`.${a + 1}x${a2}`).html(`<p class="${level == 'easy'?'easy_p':''}"></p>`)
+						$(`.${a + 1}x${a2}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
 					if (map[a - 1][a2 - 1] == "") {
 						$(`.${a - 1}y${a2 - 1}`).hide()
-						$(`.${a - 1}x${a2 - 1}`).html(`<p class="${level == 'easy'?'easy_p':''}"></p>`)
+						$(`.${a - 1}x${a2 - 1}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
 					if (map[a - 1][a2 + 1] == "") {
 						$(`.${a - 1}y${a2 + 1}`).hide()
-						$(`.${a - 1}x${a2 + 1}`).html(`<p class="${level == 'easy'?'easy_p':''}"></p>`)
+						$(`.${a - 1}x${a2 + 1}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
 					if (map[a + 1][a2 - 1] == "") {
 						$(`.${a + 1}y${a2 - 1}`).hide()
-						$(`.${a + 1}x${a2 - 1}`).html(`<p class="${level == 'easy'?'easy_p':''}"></p>`)
+						$(`.${a + 1}x${a2 - 1}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
 					if (map[a + 1][a2 + 1] == "") {
 						$(`.${a + 1}y${a2 + 1}`).hide()
-						$(`.${a + 1}x${a2 + 1}`).html(`<p class="${level == 'easy'?'easy_p':''}"></p>`)
+						$(`.${a + 1}x${a2 + 1}`).html(`<p></p>`)
 					}
 				}
 				catch{}
@@ -240,7 +240,7 @@ function update(){
 								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 							}
 							$(`.${text}`).hide()
-							$(`.${text.replace("y", "x")}`).html(`<p>${(map[text.split("y")[0]][text.split("y")[1]])} </p>`)
+							$(`.${text.replace("y", "x")}`).html(`<p class="color_${(map[text.split("y")[0]][text.split("y")[1]])}">${(map[text.split("y")[0]][text.split("y")[1]])} </p>`)
 						}
 					}
 					catch{}
@@ -254,7 +254,7 @@ function update(){
 								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 							}
 							$(`.${text}`).hide()
-							$(`.${text.replace("y", "x")}`).html(map[text.split("y")[0]][text.split("y")[1]])
+							$(`.${text.replace("y", "x")}`).html(`<p class="color_${(map[text.split("y")[0]][text.split("y")[1]])}">${(map[text.split("y")[0]][text.split("y")[1]])} </p>`)
 						}
 					}
 					catch{}
@@ -267,11 +267,11 @@ function update(){
 						empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 					}
 					else{
-						$(`.${e.currentTarget.className.replace("y", "x")}`).html(map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]])
+						$(`.${e.currentTarget.className.replace("y", "x")}`).html(`<p class="color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}">${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}</p>`)
 						$(`.${e.currentTarget.className}`).hide()
 					}
 				}catch{}
-				if ($(`.${e.currentTarget.className.replace("y", "x")}`).html() == "💣") {
+				if ($(`.${e.currentTarget.className.replace("y", "x")} p`).html() == "💣") {
 					for (var i = 0; i < map.length; i++) {
 						for (var i2 = 0; i2 < map[0].length; i2++) {
 							if (map[i][i2] == "💣") {
