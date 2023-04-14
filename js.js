@@ -314,13 +314,19 @@ function update(){
 		$(this).removeClass("click_smile")
 	})
 	$("button").on("mousedown", function(e){
-		$("#faces").addClass("hmm_smile")
+		if (e.which == 1) {
+			$("#faces").addClass("hmm_smile")
+		}
 	})
 	$("button").on("mouseout", function(e){
-		$("#faces").removeClass("hmm_smile")
+		if (e.which == 1) {
+			$("#faces").removeClass("hmm_smile")
+		}
 	})
 	$("button").on("mouseup", function(e){
-		$("#faces").removeClass("hmm_smile")
+		if (e.which == 1) {
+			$("#faces").removeClass("hmm_smile")
+		}
 	})
 }
 start()
