@@ -16,8 +16,6 @@ table{
 }
 
 tr,td{
-	width: 10px;
-	height: 10px;
 	border: 1px solid black;
 	border: initial;
 	box-sizing: border-box;
@@ -26,6 +24,9 @@ tr,td{
 td{
 	text-align: center;
 	border: 1px solid black;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
 }
 td button{
 	width: 100%;
@@ -49,6 +50,17 @@ td button{
 .td_easy button p{
 	margin: 10px;
 }
-.easy_p{
-	padding: 2.3vw;
+
+
+.td_easy{
+	width: 49.81px;
+    height: 63px;
+}
+.td_medium{
+	width: 27.67px;
+    height: 36px;
+}
+.td_hard{
+	width: 20.75px;
+    height: 25px;
 }
