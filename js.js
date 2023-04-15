@@ -29,7 +29,7 @@ function start(){
 	for (var i = 0; i < ivalue; i++) {
 		$("table").append(`<tr class="${i}"></tr>`)
 		for (var i2 = 0; i2 < i2value; i2++) {
-			$(`.${i}`).append(`<td class="${i}x${i2} ${level == 'easy'?'td_easy': level == "medium" ? 'td_medium' : level == "hard"? "td_hard" : ''}"><button class="${i}y${i2}"><p></p></button></td>`)
+			$(`.${i}`).append(`<td class="${i}x${i2} td_${level}"><button class="${i}y${i2}"><p></p></button></td>`)
 		}
 	}
 	update()
@@ -329,4 +329,8 @@ function update(){
 		}
 	})
 }
+$("select").on("change", function(e){
+	level = $(this).val()
+	start()
+})
 start()

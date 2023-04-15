@@ -111,3 +111,13 @@ td > p{
 .hmm_smile{
 	background-position: -101px 70px;
 }
+select{
+	position: absolute;
+	left: 60%;
+	top: 5px;
+	cursor: pointer;
+	transform: translateX(-50%);
+	width: 96px;
+    height: 25px;
+    text-align: center;
+}
