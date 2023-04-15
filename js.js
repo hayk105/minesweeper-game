@@ -54,7 +54,6 @@ function update(){
 	window.oncontextmenu = (e) => {
 		e.preventDefault()
 		if (stop_game == false) {
-			console.log(e.srcElement.localName)
 			if ((e.srcElement.localName == "button" && $(`.${e.target.className}`).children("p").html() != "🚩") || (e.srcElement.localName == "p" && e.srcElement.innerHTML != "🚩")) {
 				if (e.srcElement.innerHTML[0] == "<") {
 					$(`.${e.target.className}`).children("p").html("🚩")
@@ -259,7 +258,7 @@ function update(){
 								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 							}
 							$(`.${text}`).hide()
-							$(`.${text.replace("y", "x")}`).html(`<p class="color_${(map[text.split("y")[0]][text.split("y")[1]])}">${(map[text.split("y")[0]][text.split("y")[1]])} </p>`)
+							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}`)
 						}
 					}
 					catch{}
@@ -273,7 +272,7 @@ function update(){
 								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 							}
 							$(`.${text}`).hide()
-							$(`.${text.replace("y", "x")}`).html(`<p class="color_${(map[text.split("y")[0]][text.split("y")[1]])}">${(map[text.split("y")[0]][text.split("y")[1]])} </p>`)
+							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}`)
 						}
 					}
 					catch{}
@@ -286,15 +285,15 @@ function update(){
 						empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 					}
 					else{
-						$(`.${e.currentTarget.className.replace("y", "x")}`).html(`<p class="color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}">${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}</p>`)
+						$(`.${e.currentTarget.className.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}`)
 						$(`.${e.currentTarget.className}`).hide()
 					}
 				}catch{}
-				if ($(`.${e.currentTarget.className.replace("y", "x")} p`).html() == "💣") {
+				if ($(`.${e.currentTarget.className.replace("y", "x")}`)[0].attributes[0].nodeValue.split(" ")[$(`.${e.currentTarget.className.replace("y", "x")}`)[0].attributes[0].nodeValue.split(" ").length - 1] == "color_💣") {
 					for (var i = 0; i < map.length; i++) {
 						for (var i2 = 0; i2 < map[0].length; i2++) {
 							if (map[i][i2] == "💣") {
-								$(`.${i}x${i2}`).html("💣")
+								$(`.${i}x${i2}`).addClass("color_💣")
 							}
 						}
 					}
@@ -304,6 +303,10 @@ function update(){
 				}
 			}
 		}
+		for (var i = 1; i < 9; i++) {
+			$(`.color_${i}`).html(`<span>${i}</span>`)	
+		}
+		$(`.color_💣`).html(`<span>💣</span>`)
 		stugel_haxtec()
 	})
 	function stugel_haxtec(){
