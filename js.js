@@ -54,6 +54,7 @@ function update(){
 	window.oncontextmenu = (e) => {
 		e.preventDefault()
 		if (stop_game == false) {
+			console.log(e.srcElement.localName)
 			if ((e.srcElement.localName == "button" && $(`.${e.target.className}`).children("p").html() != "🚩") || (e.srcElement.localName == "p" && e.srcElement.innerHTML != "🚩")) {
 				if (e.srcElement.innerHTML[0] == "<") {
 					$(`.${e.target.className}`).children("p").html("🚩")
