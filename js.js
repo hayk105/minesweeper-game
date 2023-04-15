@@ -26,6 +26,7 @@ function start(){
 		ivalue = 20
 		bomblength = 99
 	}
+	var flaglength = bomblength
 	for (var i = 0; i < ivalue; i++) {
 		$("table").append(`<tr class="${i}"></tr>`)
 		for (var i2 = 0; i2 < i2value; i2++) {
@@ -33,6 +34,19 @@ function start(){
 		}
 	}
 	update()
+function flag(){
+	$("#mines_hundreds").removeClass()
+	$("#mines_tens").removeClass()
+	$("#mines_ones").removeClass()
+
+	$("#mines_hundreds").addClass("flag_length")
+	$("#mines_tens").addClass("flag_length")
+	$("#mines_ones").addClass("flag_length")
+	var flaglength_string = String(flaglength).length
+	$("#mines_hundreds").addClass(`number${String(flaglength)[flaglength_string-3]}`)
+	$("#mines_tens").addClass(`number${String(flaglength)[flaglength_string-2]}`)
+	$("#mines_ones").addClass(`number${String(flaglength)[flaglength_string-1]}`)
+}
 
 function update(){
 	//		rigth click
@@ -47,6 +61,7 @@ function update(){
 				else{
 					e.srcElement.innerHTML = "🚩"
 				}
+				flaglength--
 			}
 			else{
 
@@ -56,8 +71,9 @@ function update(){
 				else if(e.target.localName != "td"){
 					e.srcElement.innerHTML = ""
 				}
-				// bomblength--
+				flaglength++
 			}
+			flag()
 		}
 	}
 
@@ -154,49 +170,49 @@ function update(){
 				$(`.${a}y${a2}`).hide()
 				$(`.${a}x${a2}`).html(`<p></p>`)
 				try {
-					if (map[a][a2 + 1] == "") {
+					if (map[a][a2 + 1] == "" && $(`.${a}y${a2 + 1}`).children("p")[0].innerText != "🚩") {
 						$(`.${a}y${a2 + 1}`).hide()
 						$(`.${a}x${a2 + 1}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a - 1][a2] == "") {
+					if (map[a - 1][a2] == "" && $(`.${a - 1}y${a2}`).children("p")[0].innerText != "🚩") {
 						$(`.${a - 1}y${a2}`).hide()
 						$(`.${a - 1}x${a2}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a + 1][a2] == "") {
+					if (map[a + 1][a2] == "" && $(`.${a + 1}y${a2}`).children("p")[0].innerText != "🚩") {
 						$(`.${a + 1}y${a2}`).hide()
 						$(`.${a + 1}x${a2}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a - 1][a2 - 1] == "") {
+					if (map[a - 1][a2 - 1] == "" && $(`.${a - 1}y${a2 - 1}`).children("p")[0].innerText != "🚩") {
 						$(`.${a - 1}y${a2 - 1}`).hide()
 						$(`.${a - 1}x${a2 - 1}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a - 1][a2 + 1] == "") {
+					if (map[a - 1][a2 + 1] == "" && $(`.${a - 1}y${a2 + 1}`).children("p")[0].innerText != "🚩") {
 						$(`.${a - 1}y${a2 + 1}`).hide()
 						$(`.${a - 1}x${a2 + 1}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a + 1][a2 - 1] == "") {
+					if (map[a + 1][a2 - 1] == "" && $(`.${a + 1}y${a2 - 1}`).children("p")[0].innerText != "🚩") {
 						$(`.${a + 1}y${a2 - 1}`).hide()
 						$(`.${a + 1}x${a2 - 1}`).html(`<p></p>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a + 1][a2 + 1] == "") {
+					if (map[a + 1][a2 + 1] == "" && $(`.${a + 1}y${a2 + 1}`).children("p")[0].innerText != "🚩") {
 						$(`.${a + 1}y${a2 + 1}`).hide()
 						$(`.${a + 1}x${a2 + 1}`).html(`<p></p>`)
 					}
@@ -219,6 +235,7 @@ function update(){
 
 	//          click
 	var map = []
+
 	$("td button").click(function(e){
 		if (e.target.innerText  != "🚩" && stop_game == false) {
 			arajin++
@@ -234,8 +251,9 @@ function update(){
 				var text = ""
 				for (var i = -2; i <= 2; i++) {
 					text = `${(e.currentTarget.className).split("y")[0]}y${(e.currentTarget.className).split("y")[1] - i}`
+					
 					try{
-						if (map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i] != "💣") {
+						if (map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i] != "💣" && $(`.${(e.currentTarget.className).split("y")[0]}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩") {
 							if (map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i] == "") {
 								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 							}
@@ -249,7 +267,7 @@ function update(){
 					text = `${(e.currentTarget.className).split("y")[0] - 1}y${(e.currentTarget.className).split("y")[1] - i}`
 
 					try{
-						if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] != "💣") {
+						if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] != "💣" && $(`.${(e.currentTarget.className).split("y")[0]}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩") {
 							if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] == "") {
 								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 							}

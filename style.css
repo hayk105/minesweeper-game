@@ -121,3 +121,58 @@ select{
     height: 25px;
     text-align: center;
 }
+.flag_length{
+    width: 21px;
+    height: 35px;
+    border: 1px solid black;
+    background-size: 201px;
+    background-image: url(faces.gif);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    /*background-position: 0 0;*/
+}
+#mines_hundreds{
+    left: 24%;
+    top: 31px;
+}
+#mines_tens{
+	left: 26.5%;
+    top: 31px;
+}
+#mines_ones{
+	left: 29%;
+    top: 31px;
+}
+.number0{
+	background-position: 0 0;
+}
+.number1{
+	background-position: -17px 0px;
+}
+.number2{
+	background-position: -35px 0px;
+}
+.number3{
+	background-position: -53px 0px;
+}
+.number4{
+	background-position: -71px 0px;
+}
+.number5{
+	background-position: -89px 0px;
+}
+.number6{
+	background-position: -107px 0px;
+}
+.number7{
+	background-position: -125px 0px;
+}
+.number8{
+	background-position: -143px 0px;
+}
+.number9{
+	background-position: -161px 0px;
+}
+.number-{
+	background-position: -179px 0px;
+}
