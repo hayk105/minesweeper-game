@@ -166,7 +166,6 @@ function update(){
 
 	//empty clear
 	function empty(a, a2){
-		console.log(typeof  map[a - 1][a2] + "  " + map[a - 1][a2])
 		try{
 			if (map[a][a2] == "") {
 				$(`.${a}y${a2}`).hide()
@@ -283,6 +282,7 @@ function update(){
 			}
 			else{
 				try{
+					console.log(map[Number(e.currentTarget.className.split("y")[0])][Number(e.currentTarget.className.split("y")[1])])
 					if (map[Number(e.currentTarget.className.split("y")[0])][Number(e.currentTarget.className.split("y")[1])] == "") {
 						empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 					}
