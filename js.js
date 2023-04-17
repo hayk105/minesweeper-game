@@ -27,6 +27,7 @@ function start(){
 		bomblength = 99
 	}
 	var flaglength = bomblength
+	flag()
 	for (var i = 0; i < ivalue; i++) {
 		$("table").append(`<tr class="${i}"></tr>`)
 		for (var i2 = 0; i2 < i2value; i2++) {
@@ -35,6 +36,16 @@ function start(){
 	}
 	update()
 function flag(){
+	var stugel_flag_length = 0
+	for (var i = 0; i < $("button").length; i++) {
+		if (($("button")[i]).children[0].innerText == "🚩"){
+			stugel_flag_length++
+		}
+	}
+	if (bomblength - stugel_flag_length != flaglength) {
+		flaglength = bomblength - stugel_flag_length
+	}
+	delete stugel_flag_length
 	$("#mines_hundreds").removeClass()
 	$("#mines_tens").removeClass()
 	$("#mines_ones").removeClass()
@@ -178,6 +189,7 @@ function update(){
 				}
 				catch{}
 				try {
+					// console.log($(`.${a - 1}y${a2}`).children("p")[0].innerText)
 					if ((map[a - 1][a2] == "" && $(`.${a - 1}y${a2}`).children("p")[0].innerText != "🚩")|| (typeof  map[a - 1][a2] == "number" && $(`.${a - 1}y${a2}`).children("p")[0].innerText != "🚩")) {
 						$(`.${a - 1}y${a2}`).hide()
 						$(`.${a - 1}x${a2}`).html(`<span class="color_${map[a-1][a2]}">${map[a - 1][a2]}</span>`)
@@ -238,6 +250,7 @@ function update(){
 	var map = []
 
 	$("td button").click(function(e){
+		flag()
 		if (e.target.innerText  != "🚩" && stop_game == false) {
 			arajin++
 			if (arajin == 1) {
@@ -264,8 +277,6 @@ function update(){
 					}
 					catch{}
 					
-
-					text = `${(e.currentTarget.className).split("y")[0] - 1}y${(e.currentTarget.className).split("y")[1] - i}`
 
 					try{
 						if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] != "💣" && $(`.${(e.currentTarget.className).split("y")[0]}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩") {
