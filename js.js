@@ -259,7 +259,7 @@ function update(){
 								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 							}
 							$(`.${text}`).hide()
-							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}`)
+							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1] - i]}`)
 						}
 					}
 					catch{}
@@ -273,7 +273,7 @@ function update(){
 								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 							}
 							$(`.${text}`).hide()
-							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}`)
+							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0] - 1][e.currentTarget.className.split("y")[1] - i]}`)
 						}
 					}
 					catch{}
