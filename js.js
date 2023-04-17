@@ -166,56 +166,57 @@ function update(){
 
 	//empty clear
 	function empty(a, a2){
+		console.log(typeof  map[a - 1][a2] + "  " + map[a - 1][a2])
 		try{
 			if (map[a][a2] == "") {
 				$(`.${a}y${a2}`).hide()
 				$(`.${a}x${a2}`).html(`<p></p>`)
 				try {
-					if (map[a][a2 + 1] == "" && $(`.${a}y${a2 + 1}`).children("p")[0].innerText != "🚩") {
+					if ((map[a][a2 + 1] == "" && $(`.${a}y${a2 + 1}`).children("p")[0].innerText != "🚩") || (typeof  map[a][a2 + 1] == "number" && $(`.${a}y${a2 + 1}`).children("p")[0].innerText != "🚩")) {
 						$(`.${a}y${a2 + 1}`).hide()
-						$(`.${a}x${a2 + 1}`).html(`<p></p>`)
+						$(`.${a}x${a2 + 1}`).html(`<span class="color_${map[a][a2+1]}">${map[a][a2 + 1]}</span>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a - 1][a2] == "" && $(`.${a - 1}y${a2}`).children("p")[0].innerText != "🚩") {
+					if ((map[a - 1][a2] == "" && $(`.${a - 1}y${a2}`).children("p")[0].innerText != "🚩")|| (typeof  map[a - 1][a2] == "number" && $(`.${a - 1}y${a2}`).children("p")[0].innerText != "🚩")) {
 						$(`.${a - 1}y${a2}`).hide()
-						$(`.${a - 1}x${a2}`).html(`<p></p>`)
+						$(`.${a - 1}x${a2}`).html(`<span class="color_${map[a-1][a2]}">${map[a - 1][a2]}</span>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a + 1][a2] == "" && $(`.${a + 1}y${a2}`).children("p")[0].innerText != "🚩") {
+					if ((map[a + 1][a2] == "" && $(`.${a + 1}y${a2}`).children("p")[0].innerText != "🚩") || (typeof  map[a+1][a2] == "number" && $(`.${a + 1}y${a2}`).children("p")[0].innerText != "🚩")) {
 						$(`.${a + 1}y${a2}`).hide()
-						$(`.${a + 1}x${a2}`).html(`<p></p>`)
+						$(`.${a + 1}x${a2}`).html(`<span class="color_${map[a+1][a2]}">${map[a + 1][a2]}</span>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a - 1][a2 - 1] == "" && $(`.${a - 1}y${a2 - 1}`).children("p")[0].innerText != "🚩") {
+					if ((map[a - 1][a2 - 1] == "" && $(`.${a - 1}y${a2 - 1}`).children("p")[0].innerText != "🚩") || (typeof  map[a - 1][a2 - 1] == "number" && $(`.${a - 1}y${a2 - 1}`).children("p")[0].innerText != "🚩")) {
 						$(`.${a - 1}y${a2 - 1}`).hide()
-						$(`.${a - 1}x${a2 - 1}`).html(`<p></p>`)
+						$(`.${a - 1}x${a2 - 1}`).html(`<span class="color_${map[a-1][a2-1]}">${map[a - 1][a2 -1]}</span>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a - 1][a2 + 1] == "" && $(`.${a - 1}y${a2 + 1}`).children("p")[0].innerText != "🚩") {
+					if ((map[a - 1][a2 + 1] == "" && $(`.${a - 1}y${a2 + 1}`).children("p")[0].innerText != "🚩") || (typeof  map[a - 1][a2 + 1] == "number" && $(`.${a - 1}y${a2 + 1}`).children("p")[0].innerText != "🚩")) {
 						$(`.${a - 1}y${a2 + 1}`).hide()
-						$(`.${a - 1}x${a2 + 1}`).html(`<p></p>`)
+						$(`.${a - 1}x${a2 + 1}`).html(`<span class="color_${map[a-1][a2+1]}"${map[a - 1][a2 + 1]}</span>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a + 1][a2 - 1] == "" && $(`.${a + 1}y${a2 - 1}`).children("p")[0].innerText != "🚩") {
+					if ((map[a + 1][a2 - 1] == "" && $(`.${a + 1}y${a2 - 1}`).children("p")[0].innerText != "🚩") || (typeof  map[a + 1][a2 - 1] == "number" && $(`.${a + 1}y${a2 - 1}`).children("p")[0].innerText != "🚩")) {
 						$(`.${a + 1}y${a2 - 1}`).hide()
-						$(`.${a + 1}x${a2 - 1}`).html(`<p></p>`)
+						$(`.${a + 1}x${a2 - 1}`).html(`<span class="color_${map[a+1][a2-1]}">${map[a + 1][a2 - 1]}</span>`)
 					}
 				}
 				catch{}
 				try {
-					if (map[a + 1][a2 + 1] == "" && $(`.${a + 1}y${a2 + 1}`).children("p")[0].innerText != "🚩") {
+					if ((map[a + 1][a2 + 1] == "" && $(`.${a + 1}y${a2 + 1}`).children("p")[0].innerText != "🚩")|| (typeof  map[a + 1][a2 + 1] == "number" && $(`.${a + 1}y${a2 + 1}`).children("p")[0].innerText != "🚩")) {
 						$(`.${a + 1}y${a2 + 1}`).hide()
-						$(`.${a + 1}x${a2 + 1}`).html(`<p></p>`)
+						$(`.${a + 1}x${a2 + 1}`).html(`<span class="color_${map[a+1][a2+1]}">${map[a + 1][a2 + 1]}</span>`)
 					}
 				}
 				catch{}
