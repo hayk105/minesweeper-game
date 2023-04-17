@@ -189,7 +189,6 @@ function update(){
 				}
 				catch{}
 				try {
-					// console.log($(`.${a - 1}y${a2}`).children("p")[0].innerText)
 					if ((map[a - 1][a2] == "" && $(`.${a - 1}y${a2}`).children("p")[0].innerText != "🚩")|| (typeof  map[a - 1][a2] == "number" && $(`.${a - 1}y${a2}`).children("p")[0].innerText != "🚩")) {
 						$(`.${a - 1}y${a2}`).hide()
 						$(`.${a - 1}x${a2}`).html(`<span class="color_${map[a-1][a2]}">${map[a - 1][a2]}</span>`)
@@ -293,7 +292,6 @@ function update(){
 			}
 			else{
 				try{
-					console.log(map[Number(e.currentTarget.className.split("y")[0])][Number(e.currentTarget.className.split("y")[1])])
 					if (map[Number(e.currentTarget.className.split("y")[0])][Number(e.currentTarget.className.split("y")[1])] == "") {
 						empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
 					}
