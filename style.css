@@ -1,4 +1,3 @@
-/*style bug td*/
 *{
 	margin: 0;
 	padding: 0;
@@ -37,9 +36,6 @@ td button{
     height: 50px;
 	background-image: url("faces.gif");
 	background-size: 280px;
-	position: absolute;
-	left: 50%;
-	top: 5px;
 	cursor: pointer;
 	transform: translateX(-50%);
 }
@@ -113,9 +109,6 @@ td > p{
 	background-position: -101px 70px;
 }
 select{
-	position: absolute;
-	left: 60%;
-	top: 5px;
 	cursor: pointer;
 	transform: translateX(-50%);
 	width: 96px;
@@ -128,21 +121,13 @@ select{
     border: 1px solid black;
     background-size: 201px;
     background-image: url(faces.gif);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    /*background-position: 0 0;*/
 }
-#mines_hundreds{
-    left: 24%;
-    top: 31px;
-}
-#mines_tens{
-	left: 26.5%;
-    top: 31px;
-}
-#mines_ones{
-	left: 29%;
-    top: 31px;
+#header{
+	height: 50px;
+    width: 57%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5px auto;
 }
 .number0{
 	background-position: 0 0;
@@ -176,4 +161,7 @@ select{
 }
 .number-{
 	background-position: -179px 0px;
+}
+#numbers_length{
+	display: flex;
 }

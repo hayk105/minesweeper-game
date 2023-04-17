@@ -65,13 +65,14 @@ function update(){
 			}
 			else{
 
-				if (e.srcElement.innerHTML[0] == "<") {
+				if (e.srcElement.innerHTML[0] == "<"  && e.srcElement.innerHTML[1] != "b") {
 					$(`.${e.target.className}`).children("p").html("")
+					flaglength++
 				}
-				else if(e.target.localName != "td"){
+				else if(e.target.localName != "td" && e.target.localName != "span"){
 					e.srcElement.innerHTML = ""
+					flaglength++
 				}
-				flaglength++
 			}
 			flag()
 		}
