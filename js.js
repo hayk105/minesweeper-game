@@ -248,6 +248,11 @@ function update(){
 		}
 		stugel_haxtec()
 	}
+	var a = setInterval(function(){
+		$("span").on("click", function(){
+			splitauto(($(this).parents("td")[0].classList[0].split('x')[0]), $(this).parents("td")[0].classList[0].split('x')[1], $(this));
+					})
+	}, 500)
 	//          click
 	var map = []
 
@@ -312,9 +317,6 @@ function update(){
 			$(`.color_${i}`).html(`<span>${i}</span>`)	
 		}
 		$(`.color_💣`).html(`<span>💣</span>`)
-		$("span").click(function(){
-			splitauto(($(this).parents("td")[0].classList[0].split('x')[0]), $(this).parents("td")[0].classList[0].split('x')[1], $(this))
-		})
 		stugel_haxtec()
 	})
 	function stugel_haxtec(){
