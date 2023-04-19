@@ -1,5 +1,4 @@
 //BETA
-
 var level = "easy"
 function start(){
 	$("#faces").removeClass("die_smile")
@@ -58,8 +57,8 @@ function flag(){
 	$("#mines_tens").addClass(`number${String(flaglength)[flaglength_string-2]}`)
 	$("#mines_ones").addClass(`number${String(flaglength)[flaglength_string-1]}`)
 }
-
 function update(){
+
 	//		rigth click
 
 	window.oncontextmenu = (e) => {
@@ -209,6 +208,49 @@ function update(){
 		arr = []
 		kanchel = true
 	}
+
+	//game over
+
+	function game_over(){
+		for (var i = 0; i < map.length; i++) {
+			for (var i2 = 0; i2 < map[0].length; i2++) {
+				if (map[i][i2] == "💣") {
+					$(`.${i}x${i2}`).addClass("color_💣")
+				}
+			}
+		}
+		alert("game over")
+		$("#faces").addClass("die_smile")
+		stop_game = true
+	}
+
+	//split round
+	function splitauto(a, b, t){
+		var calc = 0
+		for(var i = 0; i < method.length; i++){
+			try{
+				$(`.${eval(a)+method[i][0]}y${eval(b)+method[i][1]}`).children("p")[0].innerText == "🚩" ? calc++ :''
+			}
+			catch{}
+		}
+		if (calc == eval(t[0].innerText)) {
+			for (var i = 0; i < method.length; i++) {
+				try{
+					if($(`.${eval(a)+method[i][0]}y${eval(b)+method[i][1]}`).children("p")[0].innerText != "🚩"){
+						$(`.${eval(a)+method[i][0]}y${eval(b)+method[i][1]}`).hide()
+						$(`.${eval(a)+method[i][0]}x${eval(b)+method[i][1]}`).html(`<span class="color_${map[eval(a)+method[i][0]][eval(b)+method[i][1]]}">${map[eval(a)+method[i][0]][eval(b)+method[i][1]]}</span>`)
+						map[eval(a)+method[i][0]][eval(b)+method[i][1]] == "💣"?game_over():''
+					}
+				}
+				catch{}
+
+			}
+		}
+		stugel_haxtec()
+	}
+
+
+
 	//          click
 	var map = []
 
@@ -265,16 +307,7 @@ function update(){
 					}
 				}catch{}
 				if ($(`.${e.currentTarget.className.replace("y", "x")}`)[0].attributes[0].nodeValue.split(" ")[$(`.${e.currentTarget.className.replace("y", "x")}`)[0].attributes[0].nodeValue.split(" ").length - 1] == "color_💣") {
-					for (var i = 0; i < map.length; i++) {
-						for (var i2 = 0; i2 < map[0].length; i2++) {
-							if (map[i][i2] == "💣") {
-								$(`.${i}x${i2}`).addClass("color_💣")
-							}
-						}
-					}
-					alert("game over")
-					$("#faces").addClass("die_smile")
-					stop_game = true
+					game_over()
 				}
 			}
 		}
@@ -282,6 +315,9 @@ function update(){
 			$(`.color_${i}`).html(`<span>${i}</span>`)	
 		}
 		$(`.color_💣`).html(`<span>💣</span>`)
+		$("span").click(function(){
+			splitauto(($(this).parents("td")[0].classList[0].split('x')[0]), $(this).parents("td")[0].classList[0].split('x')[1], $(this))
+		})
 		stugel_haxtec()
 	})
 	function stugel_haxtec(){
@@ -330,4 +366,5 @@ $("select").on("change", function(e){
 	level = $(this).val()
 	start()
 })
+
 start()
