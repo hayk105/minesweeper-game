@@ -183,7 +183,7 @@ function update(){
 					try {
 						if ((map[a + method[i][0]][a2 + method[i][1]] != "💣" && $(`.${a + method[i][0]}y${a2 + method[i][1]}`).children("p")[0].innerText != "🚩")) {
 							$(`.${a+ method[i][0]}y${a2+ method[i][1]}`).hide()
-							$(`.${a+ method[i][0]}x${a2+ method[i][1]}`).html(`<span class="color_${map[a+ method[i][0]][a2+ method[i][1]]}">${map[a+ method[i][0]][a2+ method[i][1]]}</span>`)
+							$(`.${a+ method[i][0]}x${a2+ method[i][1]}`).html(`<span class="color_${map[a + method[i][0]][a2+ method[i][1]]}">${map[a+ method[i][0]][a2+ method[i][1]]}</span>`)
 							map[a + method[i][0]][a2 + method[i][1]] == ""?()=>{arr += [[a + method[i][0]], [a2 + method[i][1]]]}:""
 						}
 					}
@@ -318,6 +318,15 @@ function update(){
 		}
 		$(`.color_💣`).html(`<span>💣</span>`)
 		stugel_haxtec()
+		for (var i = 0; i < $("td").length; i++) {
+			if($("td")[i].classList.length == 4){
+				try{
+					($("td")[i]).removeClass($("td")[i].classList[3])
+				}
+				catch{}
+				($("td")[i]).html(`<span class="${$("td")[i].classList[2]}">${$("td")[i].classList[2].split('color_')[1]}</span>`)
+			}
+		}
 	})
 	function stugel_haxtec(){
 		if (arajin != 0) {
