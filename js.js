@@ -208,14 +208,15 @@ function update(){
 		arr = []
 		kanchel = true
 	}
-
 	//game over
 
 	function game_over(){
-		for (var i = 0; i < map.length; i++) {
-			for (var i2 = 0; i2 < map[0].length; i2++) {
-				if (map[i][i2] == "💣") {
-					$(`.${i}x${i2}`).addClass("color_💣")
+		for (var i3 = 0; i3 < map.length; i3++) {
+			for (var i4 = 0; i4 < map[0].length; i4++) {
+				if (map[i3][i4] == "💣") {
+					$(`.${i3}x${i4}`).addClass("color_💣")
+					$(`.color_💣`).html(`<span>💣</span>`)
+
 				}
 			}
 		}
@@ -236,10 +237,12 @@ function update(){
 		if (calc == eval(t[0].innerText)) {
 			for (var i = 0; i < method.length; i++) {
 				try{
-					if($(`.${eval(a)+method[i][0]}y${eval(b)+method[i][1]}`).children("p")[0].innerText != "🚩"){
-						$(`.${eval(a)+method[i][0]}y${eval(b)+method[i][1]}`).hide()
-						$(`.${eval(a)+method[i][0]}x${eval(b)+method[i][1]}`).html(`<span class="color_${map[eval(a)+method[i][0]][eval(b)+method[i][1]]}">${map[eval(a)+method[i][0]][eval(b)+method[i][1]]}</span>`)
-						map[eval(a)+method[i][0]][eval(b)+method[i][1]] == "💣"?game_over():''
+					if($(`.${eval(a)+eval(method[i][0])}y${eval(b)+eval(method[i][1])}`).children("p")[0].innerText != "🚩"){
+						$(`.${eval(a)+eval(method[i][0])}y${eval(b)+eval(method[i][1])}`).hide()
+						$(`.${eval(a)+eval(method[i][0])}x${eval(b)+eval(method[i][1])}`).html(`<span class="color_${map[eval(a)+eval(method[i][0])][eval(b)+eval(method[i][1])]}">${map[eval(a)+eval(method[i][0])][eval(b)+eval(method[i][1])]}</span>`)
+						if (map[eval(a)+eval(method[i][0])][eval(b)+eval(method[i][1])] == "💣") {
+							game_over()
+						}
 					}
 				}
 				catch{}
@@ -276,7 +279,7 @@ function update(){
 					try{
 						if (map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i] != "💣" && $(`.${(e.currentTarget.className).split("y")[0]}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩") {
 							if (map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i] == "") {
-								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
+								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1] - i))
 							}
 							$(`.${text}`).hide()
 							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1] - i]}`)
@@ -286,9 +289,9 @@ function update(){
 					
 
 					try{
-						if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] != "💣" && $(`.${(e.currentTarget.className).split("y")[0]}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩") {
+						if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] != "💣" && $(`.${(e.currentTarget.className).split("y")[0] - 1}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩") {
 							if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] == "") {
-								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
+								empty(Number(e.currentTarget.className.split("y")[0] - 1), Number(e.currentTarget.className.split("y")[1] - i))
 							}
 							$(`.${text}`).hide()
 							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0] - 1][e.currentTarget.className.split("y")[1] - i]}`)
@@ -316,14 +319,13 @@ function update(){
 		for (var i = 1; i < 9; i++) {
 			$(`.color_${i}`).html(`<span>${i}</span>`)	
 		}
-		$(`.color_💣`).html(`<span>💣</span>`)
 		stugel_haxtec()
 		for (var i = 0; i < $("td").length; i++) {
 			if($("td")[i].classList.length == 4){
 				try{
 					($("td")[i]).removeClass($("td")[i].classList[3])
 				
-					($("td")[i]).html(`<span class="${$("td")[i].classList[2]}">${$("td")[i].classList[2].split('color_')[1]}</span>`)
+					($("td")[i]).html(`<span class="${eval($("td")[i].classList[2])-1}">${eval($("td")[i].classList[2].split('color_')[1])-1 != 0?eval($("td")[i].classList[2].split('color_')[1])-1:''}</span>`)
 				}
 				catch{}
 			}
