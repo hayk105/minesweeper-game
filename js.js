@@ -248,9 +248,6 @@ function update(){
 		}
 		stugel_haxtec()
 	}
-
-
-
 	//          click
 	var map = []
 
