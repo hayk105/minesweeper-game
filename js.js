@@ -322,9 +322,10 @@ function update(){
 			if($("td")[i].classList.length == 4){
 				try{
 					($("td")[i]).removeClass($("td")[i].classList[3])
+				
+					($("td")[i]).html(`<span class="${$("td")[i].classList[2]}">${$("td")[i].classList[2].split('color_')[1]}</span>`)
 				}
 				catch{}
-				($("td")[i]).html(`<span class="${$("td")[i].classList[2]}">${$("td")[i].classList[2].split('color_')[1]}</span>`)
 			}
 		}
 	})
