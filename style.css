@@ -165,3 +165,9 @@ select{
 #numbers_length{
 	display: flex;
 }
+span{
+	min-height: 100%;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}

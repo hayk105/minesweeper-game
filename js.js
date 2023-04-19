@@ -174,88 +174,41 @@ function update(){
 	}
 
 	var kanchel = true
-
+	var arr =[]
+	var method = [[0, 0], [1, 1], [-1, -1], [1, -1], [-1, 1], [0, 1], [0, -1], [1, 0], [-1, 0]]
 	//empty clear
 	function empty(a, a2){
 		try{
 			if (map[a][a2] == "") {
-				$(`.${a}y${a2}`).hide()
-				$(`.${a}x${a2}`).html(`<p></p>`)
-				try {
-					if ((map[a][a2 + 1] != "💣" && $(`.${a}y${a2 + 1}`).children("p")[0].innerText != "🚩")) {
-						$(`.${a}y${a2 + 1}`).hide()
-						$(`.${a}x${a2 + 1}`).html(`<span class="color_${map[a][a2+1]}">${map[a][a2 + 1]}</span>`)
+				for (var i = 0; i < method.length; i++) {
+					try {
+						if ((map[a + method[i][0]][a2 + method[i][1]] != "💣" && $(`.${a + method[i][0]}y${a2 + method[i][1]}`).children("p")[0].innerText != "🚩")) {
+							$(`.${a+ method[i][0]}y${a2+ method[i][1]}`).hide()
+							$(`.${a+ method[i][0]}x${a2+ method[i][1]}`).html(`<span class="color_${map[a+ method[i][0]][a2+ method[i][1]]}">${map[a+ method[i][0]][a2+ method[i][1]]}</span>`)
+							map[a + method[i][0]][a2 + method[i][1]] == ""?()=>{arr += [[a + method[i][0]], [a2 + method[i][1]]]}:""
+						}
 					}
+					catch{}
 				}
-				catch{}
-				try {
-					if ((map[a][a2 - 1] != "💣" && $(`.${a}y${a2 + 1}`).children("p")[0].innerText != "🚩")) {
-						$(`.${a}y${a2 - 1}`).hide()
-						$(`.${a}x${a2 - 1}`).html(`<span class="color_${map[a][a2-1]}">${map[a][a2 - 1]}</span>`)
-					}
-				}
-				catch{}
-				try {
-					if (map[a - 1][a2] != "💣" && $(`.${a - 1}y${a2}`).children("p")[0].innerText != "🚩") {
-						$(`.${a - 1}y${a2}`).hide()
-						$(`.${a - 1}x${a2}`).html(`<span class="color_${map[a-1][a2]}">${map[a - 1][a2]}</span>`)
-					}
-				}
-				catch{}
-				try {
-					if (map[a + 1][a2] != "💣" && $(`.${a + 1}y${a2}`).children("p")[0].innerText != "🚩") {
-						$(`.${a + 1}y${a2}`).hide()
-						$(`.${a + 1}x${a2}`).html(`<span class="color_${map[a+1][a2]}">${map[a + 1][a2]}</span>`)
-					}
-				}
-				catch{}
-				try {
-					if (map[a - 1][a2 - 1] != "💣" && $(`.${a - 1}y${a2 - 1}`).children("p")[0].innerText != "🚩") {
-						$(`.${a - 1}y${a2 - 1}`).hide()
-						$(`.${a - 1}x${a2 - 1}`).html(`<span class="color_${map[a-1][a2-1]}">${map[a - 1][a2 -1]}</span>`)
-					}
-				}
-				catch{}
-				try {
-					if (map[a - 1][a2 + 1] != "💣" && $(`.${a - 1}y${a2 + 1}`).children("p")[0].innerText != "🚩") {
-						$(`.${a - 1}y${a2 + 1}`).hide()
-						$(`.${a - 1}x${a2 + 1}`).html(`<span class="color_${map[a-1][a2+1]}"${map[a - 1][a2 + 1]}</span>`)
-					}
-				}
-				catch{}
-				try {
-					if (map[a + 1][a2 - 1] != "💣" && $(`.${a + 1}y${a2 - 1}`).children("p")[0].innerText != "🚩") {
-						$(`.${a + 1}y${a2 - 1}`).hide()
-						$(`.${a + 1}x${a2 - 1}`).html(`<span class="color_${map[a+1][a2-1]}">${map[a + 1][a2 - 1]}</span>`)
-					}
-				}
-				catch{}
-				try {
-					if (map[a + 1][a2 + 1] != "💣" && $(`.${a + 1}y${a2 + 1}`).children("p")[0].innerText != "🚩") {
-						$(`.${a + 1}y${a2 + 1}`).hide()
-						$(`.${a + 1}x${a2 + 1}`).html(`<span class="color_${map[a+1][a2+1]}">${map[a + 1][a2 + 1]}</span>`)
-					}
-				}
-				catch{}
 				kanchel == true ? kanchi(a, a2) : "";
 			}
 		}
 		catch{}
-		return ""
-	}
-	function kanchi(a, a2){
-		kanchel = false
-		empty(a+1, a2+1)
-		empty(a-1, a2-1)
-		empty(a+1, a2-1)
-		empty(a-1, a2+1)
-		empty(a, a2+1)
-		empty(a, a2-1)
-		empty(a+1, a2)
-		empty(a-1, a2)
-		kanchel = true
 	}
 
+	function kanchi(a, a2){
+		kanchel = false
+		for (var i = 0; i < method.length; i++) {
+			empty(a+method[i][0], a2+method[i][1])
+		}
+		arr.length != 0 ?()=>{
+			for (var i = 0; i < arr.length; i++) {
+				empty(arr[i][0]+method[i][0], arr[i][1]+method[i][1])
+			}}
+		:""
+		arr = []
+		kanchel = true
+	}
 	//          click
 	var map = []
 
