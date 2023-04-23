@@ -5,9 +5,7 @@ function start(){
 	var ivalue = 0
 	var i2value = 0
 	var bomblength = 0
-	var arajin = 0
 	var no_spam = []
-	var ok = 0
 	var stop_game = false
 	$("table").html("")
 	if (level == "easy") {
@@ -57,9 +55,7 @@ function flag(){
 	$("#mines_ones").addClass(`number${String(flaglength)[flaglength_string-1]}`)
 }
 function update(){
-
 	//		rigth click
-
 	window.oncontextmenu = (e) => {
 		e.preventDefault()
 		if (stop_game == false) {
@@ -86,9 +82,9 @@ function update(){
 			flag()
 		}
 	}
-
 	// generate
 	function generate_bombs(a){
+		var ok = 0
 		while(ok != bomblength){
 			var rand1 = Math.floor(Math.random() * ivalue)
 			var rand2 = Math.floor(Math.random() * i2value)
@@ -106,10 +102,9 @@ function update(){
 			}
 		}
 		number_generate()
+		delete ok, error, rand1, rand2
 	}
-
 	// number generate
-
 	function number_generate(){
 		var qani = 0
 		for (var i = 0; i < map.length; i++) {
@@ -170,7 +165,6 @@ function update(){
 		}
 		console.log(map)
 	}
-
 	var kanchel = true
 	var arr =[]
 	var method = [[0, 0], [1, 1], [-1, -1], [1, -1], [-1, 1], [0, 1], [0, -1], [1, 0], [-1, 0]]
@@ -193,7 +187,6 @@ function update(){
 		}
 		catch{}
 	}
-
 	function kanchi(a, a2){
 		kanchel = false
 		for (var i = 0; i < method.length; i++) {
@@ -207,15 +200,13 @@ function update(){
 		arr = []
 		kanchel = true
 	}
-	//game over
-
+//game over
 	function game_over(){
 		for (var i3 = 0; i3 < map.length; i3++) {
 			for (var i4 = 0; i4 < map[0].length; i4++) {
 				if (map[i3][i4] == "💣") {
 					$(`.${i3}x${i4}`).addClass("color_💣")
 					$(`.color_💣`).html(`<span>💣</span>`)
-
 				}
 			}
 		}
@@ -223,8 +214,7 @@ function update(){
 		$("#faces").addClass("die_smile")
 		stop_game = true
 	}
-
-	//split round
+//split round
 	function splitauto(a, b, t){
 		var calc = 0
 		for(var i = 0; i < method.length; i++){
@@ -260,13 +250,11 @@ function update(){
 	})
 	//          click
 	var map = []
-
 	$("td button").click(function(e){
-		console.log(e.currentTarget.className)
+		var e_class = e.currentTarget.className
 		flag()
 		if (e.target.innerText  != "🚩" && stop_game == false) {
-			arajin++
-			if (arajin == 1) {
+			if (!map.length) {
 				// poqr 3 hide
 				for (var i2 = 0; i2 < ivalue; i2++) {
 					map.push([])
@@ -274,49 +262,47 @@ function update(){
 						map[i2].push("")
 					}
 				}
-				generate_bombs(e.currentTarget.className)
+				generate_bombs(e_class)
 				var text = ""
 				for (var i = -2; i <= 2; i++) {
-					text = `${(e.currentTarget.className).split("y")[0]}y${(e.currentTarget.className).split("y")[1] - i}`
-					
+					text = `${(e_class).split("y")[0]}y${(e_class).split("y")[1] - i}`
+					var hide = $(`.${text}`).hide()
 					try{
-						if (map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i] != "💣" && $(`.${(e.currentTarget.className).split("y")[0]}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩") {
-							if (map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i] == "") {
-								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1] - i))
+						if (map[(e_class).split("y")[0]][(e_class).split("y")[1] - i] != "💣" && $(`.${(e_class).split("y")[0]}y${(e_class).split("y")[1] - i}`).children("p")[0].innerText != "🚩") {
+							if (map[(e_class).split("y")[0]][(e_class).split("y")[1] - i] == "") {
+								empty(Number(e_class.split("y")[0]), Number(e_class.split("y")[1] - i))
 							}
-							$(`.${text}`).hide()
-							$(`.${text.replace("y", "x")}`).addClass(`color_${map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i]}`)
-							$(`.${text.replace("y", "x")}`).html(`<span>${map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i]}</span>`)
-							// console.log($(`.${text.replace("y", "x")}`).html())
+							hide
+							$(`.${text.replace("y", "x")}`).addClass(`color_${map[(e_class).split("y")[0]][(e_class).split("y")[1] - i]}`)
+							$(`.${text.replace("y", "x")}`).html(`<span>${map[(e_class).split("y")[0]][(e_class).split("y")[1] - i]}</span>`)
 						}
 					}
 					catch{}
-					
-
 					try{
-						if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] != "💣" && $(`.${(e.currentTarget.className).split("y")[0] - 1}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩" && $(`.${text.replace("y", "x")}`).children("span")[0].innerText == "") {
-							if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] == "") {
-								empty(Number(e.currentTarget.className.split("y")[0] - 1), Number(e.currentTarget.className.split("y")[1] - i))
+						if (map[((e_class).split("y")[0] - 1)][((e_class).split("y")[1] - i)] != "💣" && $(`.${(e_class).split("y")[0] - 1}y${(e_class).split("y")[1] - i}`).children("p")[0].innerText != "🚩" && $(`.${text.replace("y", "x")}`).children("span")[0].innerText == "") {
+							if (map[((e_class).split("y")[0] - 1)][((e_class).split("y")[1] - i)] == "") {
+								empty(Number(e_class.split("y")[0] - 1), Number(e_class.split("y")[1] - i))
 							}
-							$(`.${text}`).hide()
-							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0] - 1][e.currentTarget.className.split("y")[1] - i]}`)
+							hide
+							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e_class.split("y")[0] - 1][e.e_class.split("y")[1] - i]}`)
 						}
 					}
 					catch{}
 					text = ''
 				}
+				delete hide
 			}
 			else{
 				try{
-					if (map[Number(e.currentTarget.className.split("y")[0])][Number(e.currentTarget.className.split("y")[1])] == "") {
-						empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1]))
+					if (map[Number(e_class.split("y")[0])][Number(e_class.split("y")[1])] == "") {
+						empty(Number(e_class.split("y")[0]), Number(e_class.split("y")[1]))
 					}
 					else{
-						$(`.${e.currentTarget.className.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1]]}`)
-						$(`.${e.currentTarget.className}`).hide()
+						$(`.${e_class.replace("y", "x")}`).addClass(`color_${map[e_class.split("y")[0]][e_class.split("y")[1]]}`)
+						$(`.${e_class}`).hide()
 					}
 				}catch{}
-				if ($(`.${e.currentTarget.className.replace("y", "x")}`)[0].attributes[0].nodeValue.split(" ")[$(`.${e.currentTarget.className.replace("y", "x")}`)[0].attributes[0].nodeValue.split(" ").length - 1] == "color_💣") {
+				if ($(`.${e_class.replace("y", "x")}`)[0].attributes[0].nodeValue.split(" ")[$(`.${e_class.replace("y", "x")}`)[0].attributes[0].nodeValue.split(" ").length - 1] == "color_💣") {
 					game_over()
 				}
 			}
@@ -325,20 +311,9 @@ function update(){
 			$(`.color_${i}`).html(`<span>${i}</span>`)	
 		}
 		stugel_haxtec()
-		for (var i = 0; i < $("td").length; i++) {
-			if($("td")[i].classList.length == 4){
-				try{
-					($("td")[i]).removeClass($("td")[i].classList[3])
-				
-					($("td")[i]).html(`<span class="${eval($("td")[i].classList[2])-1}">${eval($("td")[i].classList[2].split('color_')[1])-1 != 0?eval($("td")[i].classList[2].split('color_')[1])-1:''}</span>`)
-				}
-				catch{}
-			}
-		}
 	})
-
 	function stugel_haxtec(){
-		if (arajin != 0) {
+		if (map.length) {
 			for (var i = 0; i < $("button").length; i++) {
 				try{
 					if (map[(($("button")[i].className).split("y")[0])][(($("button")[i].className).split("y")[1])] != "💣"){
@@ -383,6 +358,4 @@ $("select").on("change", function(e){
 	level = $(this).val()
 	start()
 })
-
-
 start()
