@@ -48,7 +48,6 @@ function flag(){
 	$("#mines_hundreds").removeClass()
 	$("#mines_tens").removeClass()
 	$("#mines_ones").removeClass()
-
 	$("#mines_hundreds").addClass("flag_length")
 	$("#mines_tens").addClass("flag_length")
 	$("#mines_ones").addClass("flag_length")
@@ -251,15 +250,19 @@ function update(){
 		}
 		stugel_haxtec()
 	}
-	var a = setInterval(function(){
-		$("span").on("click", function(){
-			splitauto(($(this).parents("td")[0].classList[0].split('x')[0]), $(this).parents("td")[0].classList[0].split('x')[1], $(this));
-					})
-	}, 500)
+	$("td").click(function(e){
+		if(e.target.localName == "span"){
+			try{
+				splitauto(($(this).parents("td").prevObject[0].classList[0].split('x')[0]), $(this).parents("td").prevObject[0].classList[0].split('x')[1], $(this));
+			}
+			catch{}
+		}
+	})
 	//          click
 	var map = []
 
 	$("td button").click(function(e){
+		console.log(e.currentTarget.className)
 		flag()
 		if (e.target.innerText  != "🚩" && stop_game == false) {
 			arajin++
@@ -282,14 +285,16 @@ function update(){
 								empty(Number(e.currentTarget.className.split("y")[0]), Number(e.currentTarget.className.split("y")[1] - i))
 							}
 							$(`.${text}`).hide()
-							$(`.${text.replace("y", "x")}`).addClass(`color_${map[e.currentTarget.className.split("y")[0]][e.currentTarget.className.split("y")[1] - i]}`)
+							$(`.${text.replace("y", "x")}`).addClass(`color_${map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i]}`)
+							$(`.${text.replace("y", "x")}`).html(`<span>${map[(e.currentTarget.className).split("y")[0]][(e.currentTarget.className).split("y")[1] - i]}</span>`)
+							// console.log($(`.${text.replace("y", "x")}`).html())
 						}
 					}
 					catch{}
 					
 
 					try{
-						if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] != "💣" && $(`.${(e.currentTarget.className).split("y")[0] - 1}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩") {
+						if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] != "💣" && $(`.${(e.currentTarget.className).split("y")[0] - 1}y${(e.currentTarget.className).split("y")[1] - i}`).children("p")[0].innerText != "🚩" && $(`.${text.replace("y", "x")}`).children("span")[0].innerText == "") {
 							if (map[((e.currentTarget.className).split("y")[0] - 1)][((e.currentTarget.className).split("y")[1] - i)] == "") {
 								empty(Number(e.currentTarget.className.split("y")[0] - 1), Number(e.currentTarget.className.split("y")[1] - i))
 							}
@@ -331,6 +336,7 @@ function update(){
 			}
 		}
 	})
+
 	function stugel_haxtec(){
 		if (arajin != 0) {
 			for (var i = 0; i < $("button").length; i++) {
@@ -377,5 +383,6 @@ $("select").on("change", function(e){
 	level = $(this).val()
 	start()
 })
+
 
 start()
