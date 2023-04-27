@@ -1,5 +1,6 @@
 //BETA
 var level="easy"
+var record = 999
 function start(){
 	$("#faces").removeClass("die_smile")
 	var h=$("#mines_hundreds")
@@ -209,6 +210,7 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 		flag()
 		if (e.target.innerText!="🚩"&&stop_game==false){
 			if (!map.length){
+				set(0)
 				// poqr 3 hide
 				for (var i2=0; i2<ivalue;i2++){
 					map.push([])
@@ -264,17 +266,35 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 		}
 		stugel_haxtec()
 	})
+	// set timer
+	var time
+	var timer
+	function set(a){
+		if (a==0) {
+			timer = 0
+			time = setInterval(function(){
+				timer == 999 ? clearInterval(time) : '';
+				timer++;
+			}, 1000)
+		}
+		if (a == 1) {
+			return timer;
+		}
+		a==2?clearInterval(time):''
+	}
+
+	// stugel haxtec xaxy
 	function stugel_haxtec(){
 		if (map.length){
-			for (var i=0; i < $("button").length; i++){
-				try{
-					if (map[(($("button")[i].className).split("y")[0])][(($("button")[i].className).split("y")[1])] !="💣"){
-						return ""
-					}
-				}catch{}
-			}
-			if (stop_game==false){
-				alert("You win😁")
+			if (stop_game==false && $("td button").length==bomblength){
+				set(2)
+				set(1)<record?record=set(1):''
+				$("#record").html(`YOUR RECORD: ${record}s`)
+				$("#score").html(`YOUR SCORE: ${set(1)}s`)
+				$("#you_win").show()
+				$("#you_win").animate({
+					opacity: 1,
+				}, 1000)
 				stop_game=true
 			}
 		}

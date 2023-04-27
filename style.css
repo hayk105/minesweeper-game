@@ -165,9 +165,71 @@ select{
 #numbers_length{
 	display: flex;
 }
-span{
+table span{
 	min-height: 100%;
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+}
+#you_win{
+	width: 200px;
+	height: 300px;
+	background-color: gray;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	border-radius: 12px;
+	background-image: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+	display: none;
+	opacity: 0;
+}
+#you_win h3{
+	font-size: 33px;
+}
+#you_win span{
+	font-size
+}
+#you_win input{
+	width: 109px;
+    height: 39px;
+    position: fixed;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    border-radius: 22px;
+    cursor: pointer;
+}
+#coin {
+	font-size: 33px;
+    position: fixed;
+    bottom: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+}
+#record{
+	font-size: 18px;
+    position: fixed;
+    top: 42%;
+    left: 52%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+#score{
+	position: fixed;
+    font-size: 21px;
+    left: 16px;
+    top: 19%;
+}
+#you_win_back{
+	background-image: url(./win_lose.png);
+    position: absolute;
+    width: 166%;
+    height: 69px;
+    left: -70px;
+    top: -33px;
+    background-position: -398px 110px;
+    background-size: 378px;
 }
