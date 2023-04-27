@@ -2,6 +2,10 @@
 var level="easy"
 var record = 999
 function start(){
+	$("#you_win").hide()
+	$("#you_lose").hide()
+	$('#you_win').css("opacity", 0)
+	$('#you_lose').css("opacity", 0)
 	$("#faces").removeClass("die_smile")
 	var h=$("#mines_hundreds")
 	var t=$("#mines_tens")
@@ -166,8 +170,11 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 				}
 			}
 		}
-		alert("game over")
 		$("#faces").addClass("die_smile")
+		$("#you_lose").show()
+		$("#you_lose").animate({
+			opacity: 1,
+		}, 1000)
 		stop_game=true
 	}
 //split round
@@ -291,6 +298,7 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 				set(1)<record?record=set(1):''
 				$("#record").html(`YOUR RECORD: ${record}s`)
 				$("#score").html(`YOUR SCORE: ${set(1)}s`)
+				$("#coin").html(`${level=="easy"?"10coin":level=="medium"?"20coin":"50coin"}`)
 				$("#you_win").show()
 				$("#you_win").animate({
 					opacity: 1,

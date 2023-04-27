@@ -28,8 +28,13 @@
 		<span id="you_win_back"></span>
 		<span id="score"></span>
 		<span id="record"></span>
-		<span id="coin">10 coin</span>
+		<span id="coin"></span>
 		<input type="button" value="Continue" onclick="$('#you_win').hide(); start()">
+	</div>
+	<div id="you_lose">
+		<span id="you_lose_back"></span>
+		<span id="coin_lose">0 coin</span>
+		<input type="button" value="Try Again" onclick="$('#you_lose').hide(); start()">
 	</div>
 	<script src="js.js"></script>
 </body>

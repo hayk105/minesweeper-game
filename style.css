@@ -171,7 +171,7 @@ table span{
     align-items: center;
     cursor: pointer;
 }
-#you_win{
+#you_win, #you_lose{
 	width: 200px;
 	height: 300px;
 	background-color: gray;
@@ -191,7 +191,7 @@ table span{
 #you_win span{
 	font-size
 }
-#you_win input{
+#you_win input, #you_lose input{
 	width: 109px;
     height: 39px;
     position: fixed;
@@ -223,7 +223,7 @@ table span{
     left: 16px;
     top: 19%;
 }
-#you_win_back{
+#you_win_back, #you_lose_back{
 	background-image: url(./win_lose.png);
     position: absolute;
     width: 166%;
@@ -232,4 +232,18 @@ table span{
     top: -33px;
     background-position: -398px 110px;
     background-size: 378px;
+}
+#you_lose_back{
+    background-position: -398px 218px;
+}
+#you_lose{
+	background-image: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+}
+#coin_lose{
+	font-size: 46px;
+    position: fixed;
+    width: 100%;
+    left: 0px;
+    bottom: 50%;
+    transform: translateY(10px);
 }
