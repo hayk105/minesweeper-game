@@ -1,13 +1,14 @@
 //BETA
 var level="easy"
 var record = 999
-var coin = 500
-var no_flag = 99
-var metal_search = 99
-var noric_cnvel = 999
+var coin = 9999
+var no_flag = 0
+var metal_search = 0
+var noric_cnvel = 0
 var use_tools = false
 var map =[]
 function start(){
+	map=[]
 	use_tools=false
 	up_coin()
 	$("#you_win").hide()
@@ -470,7 +471,3 @@ $(".no_flag").click(function(){
 		}
 		a==2?clearInterval(time):''
 	}
-
-
-
-// 3 gorciq meky cuyc tal 4x4 heravorutyan vra mek min i texy ev drosh dnel erkrordy cuyc tal sxal droshnery ays angam bolory errordy karoxanal partveluc heto veradarnal ev ayd mini texy avtomat drosh e dnvelu
