@@ -1,7 +1,15 @@
 //BETA
 var level="easy"
 var record = 999
+var coin = 500
+var no_flag = 99
+var metal_search = 99
+var noric_cnvel = 999
+var use_tools = false
+var map =[]
 function start(){
+	use_tools=false
+	up_coin()
 	$("#you_win").hide()
 	$("#you_lose").hide()
 	$('#you_win').css("opacity", 0)
@@ -64,7 +72,7 @@ function update(){
 //rigth click
 	window.oncontextmenu=(e)=>{
 		e.preventDefault()
-		if (stop_game==false){
+		if (stop_game==false && use_tools ==false){
 			if ((e.srcElement.localName=="button" && $(`.${e.target.className}`).children("p").html() !="🚩")||(e.srcElement.localName=="p"&&e.srcElement.innerHTML !="🚩")){
 				if (e.srcElement.innerHTML[0]=="<"){
 					$(`.${e.target.className}`).children("p").html("🚩")
@@ -210,12 +218,33 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 			}catch{}
 		}
 	})
+	//use noric cnvel
+	$(".noric_cnvel2").click(function(){
+		if (noric_cnvel!=0&&use_tools==false) {
+			noric_cnvel-=1
+			use_tools=true
+			$("#you_lose").hide()
+			for (var i = 0; i < $(".color_💣").length; i++) {
+				($(".color_💣")[i]).innerHTML=`<button class="${($(".color_💣")[i].classList[0]).replace("x", "y")}"><p></p></button>`
+			}
+			$(".color_💣").removeClass("color_💣")
+			$("button")[0].click()
+			$("#faces").removeClass("die_smile")
+			use_tools=false
+			stop_game=false
+		}
+		$("td button").click(function(e){
+			click_button(e)
+		})
+	})
 	//          click
-	var map=[]
 	$("td button").click(function(e){
+		click_button(e)
+	})
+	function click_button(e){
 		var e_class=e.currentTarget.className
 		flag()
-		if (e.target.innerText!="🚩"&&stop_game==false){
+		if (e.target.innerText!="🚩"&&stop_game==false&&use_tools==false){
 			if (!map.length){
 				set(0)
 				// poqr 3 hide
@@ -272,22 +301,6 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 			$(`.color_${i}`).html(`<span>${i}</span>`)	
 		}
 		stugel_haxtec()
-	})
-	// set timer
-	var time
-	var timer
-	function set(a){
-		if (a==0) {
-			timer = 0
-			time = setInterval(function(){
-				timer == 999 ? clearInterval(time) : '';
-				timer++;
-			}, 1000)
-		}
-		if (a == 1) {
-			return timer;
-		}
-		a==2?clearInterval(time):''
 	}
 
 	// stugel haxtec xaxy
@@ -298,7 +311,8 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 				set(1)<record?record=set(1):''
 				$("#record").html(`YOUR RECORD: ${record}s`)
 				$("#score").html(`YOUR SCORE: ${set(1)}s`)
-				$("#coin").html(`${level=="easy"?"10coin":level=="medium"?"20coin":"50coin"}`)
+				$("#coin").html(`${level=="easy"?"10💰":level=="medium"?"20💰":"50💰"}`)
+				level=="easy"?coin+=10:level=="medium"?coin+=20:coin+=50
 				$("#you_win").show()
 				$("#you_win").animate({
 					opacity: 1,
@@ -308,6 +322,7 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 		}
 	}
 	}
+
 	$("#faces").on("mousedown", function(e){
 		$(this).addClass("click_smile")
 	})
@@ -338,3 +353,124 @@ $("select").on("change", function(e){
 	start()
 })
 start()
+
+$("#close").click(function(){
+	$("#shop_page").hide()
+})
+$("#shop").click(function(){
+	$("#shop_page").toggle()
+})
+function akcia_buy(){
+	if (coin >= 500) {
+		no_flag += 3
+		metal_search += 3
+		noric_cnvel += 3
+		coin-=500
+		up_coin()
+	}
+}
+
+function up_coin(){
+	$("#coin_value").html(`${coin}💰`)
+	no_flag == 0 ?$(".tools .no_flag").css('filter', " grayscale(100%)"):$(".tools .no_flag").css('filter', " grayscale(0%)")
+	metal_search == 0 ?$(".tools .metal").css('filter', " grayscale(100%)"):$(".tools .metal").css('filter', " grayscale(0%)")
+	noric_cnvel == 0 ?$(".tools .noric_cnvel2").css('filter', " grayscale(100%)"):$(".tools .noric_cnvel2").css('filter', " grayscale(0%)")
+}
+function buy(price, add){
+	if (coin>=price) {
+		coin-=price
+		add=="metal_search"?metal_search+=1:add=="no_flag"?no_flag+=1:noric_cnvel+=1
+		up_coin()
+	}
+}
+//use metal searcher
+$(".metal").click(function(){
+	if (metal_search!=0&&use_tools==false) {
+		var sxmec=false
+		var event
+		metal_search-=1
+		use_tools=true
+		$("table td").on("mouseover", function(e) {
+			var method2 = [[0, -2], [1, -2], [-1, -2], [-2, -2], [2, -2], [2, -1], [2, 0], [2, 1], [2, 2],  [2, 2], [1, 2], [0, 2], [-1, 2], [-2, 2], [-2, 1], [-2, 0], [-2, -1]]
+			if (sxmec==false) {
+				event=e
+				$("table td").removeClass("border-right")
+				$("table td").removeClass("border-bottom")
+				$("table td").removeClass("border-top")
+				$("table td").removeClass("border-left")
+				for (var i = 0; i < method2.length; i++) {
+					var c_e = (e.currentTarget.className.split(' ')[0]).split('x')
+					$(`.${eval(c_e[0])-method2[i][0]}x${eval(c_e[1])-method2[i][1]}`).addClass(`${i<=2?"border-right":i==3?"border-right border-bottom":i==4?"border-top border-right":i>=3&&i<=8?"border-top":i>=8&&i<13?"border-left":i==13?"border-left border-bottom":i>13?"border-bottom":""}`)
+				}
+			}
+		})
+		$("table td").click(function(){
+			if (sxmec==false) {
+				var c_e2 = (event.currentTarget.className.split(' ')[0]).split('x')
+				sxmec=true
+				var hashvel=0
+				for (var i =eval(c_e2[0])-2; i <= eval(c_e2[0])+2; i++) {
+					for (var i2 = eval(c_e2[1])-2; i2 <= eval(c_e2[1])+2; i2++) {
+						try{
+							if ((map[i][i2]=="💣") && ($(`.${i}y${i2}`)[0].innerText!="🚩")) {
+								if (hashvel>=3) {
+									break
+								}
+								else{
+									hashvel++
+									$(`.${i}y${i2}`).html(`<p>🚩</p>`)
+								}
+							}
+						}
+						catch{}
+					}
+				}
+				$("table td").removeClass("border-right")
+				$("table td").removeClass("border-bottom")
+				$("table td").removeClass("border-top")
+				$("table td").removeClass("border-left")
+				hashvel=0
+				smxec=false
+				$("button")[0].click()
+				use_tools=false
+		}
+		})
+	}
+})
+
+//use no flag tool
+$(".no_flag").click(function(){
+	if (no_flag!=0&&use_tools==false) {
+		no_flag-=1
+		use_tools=true
+		for (var i = 0; i < $("p").length; i++) {
+			if ($("button")[i].innerText=="🚩") {
+				try{
+					map[($("button")[i].classList[0]).split("y")[0]][($("button")[i].classList[0]).split("y")[1]]!="💣"?$(`.${$("button")[i].classList[0]}`).html("<p></p>"):""
+				}
+				catch{}
+			}
+		}
+		use_tools=false
+	}
+})
+// set timer
+	var time = 0
+	var timer = 0
+	function set(a){
+		if (a==0&&timer==0) {
+			timer = 0
+			time = setInterval(function(){
+				timer == 999 ? clearInterval(time) : '';
+				timer++;
+			}, 1000)
+		}
+		if (a == 1) {
+			return timer;
+		}
+		a==2?clearInterval(time):''
+	}
+
+
+
+// 3 gorciq meky cuyc tal 4x4 heravorutyan vra mek min i texy ev drosh dnel erkrordy cuyc tal sxal droshnery ays angam bolory errordy karoxanal partveluc heto veradarnal ev ayd mini texy avtomat drosh e dnvelu

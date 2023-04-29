@@ -8,6 +8,7 @@
 	<title>Minesweeper</title>
 </head>
 <body>
+	<span id="coin_value">0 💰</span>
 	<div id="header">
 		<div id="numbers_length">
 			<div id="mines_hundreds" class="flag_length"></div>
@@ -31,9 +32,51 @@
 		<span id="coin"></span>
 		<input type="button" value="Continue" onclick="$('#you_win').hide(); start()">
 	</div>
+	<div class="tools">
+		<div class="metal">
+			
+		</div>
+		<div class="no_flag">
+			
+		</div>
+		<div class="noric_cnvel2">
+			
+		</div>
+		<div id="shop">
+			
+		</div>
+	</div>
+	<div id="shop_page">
+		<img src="close.png" alt="" id="close">
+		<div id="akcia">
+			<div class="metal">
+			
+			</div>
+			<div class="no_flag">
+				
+			</div>
+			<div class="noric_cnvel">
+				
+			</div>
+			<input type="button" class="button_pos" value="500💰" onclick="akcia_buy()">
+		</div>
+		<br>
+		<div id="metal_shop">
+			<input type="button" class="button_pos" value="30💰" onclick="buy(30, 'metal_search')">
+		</div>
+		<br>
+		<div id="no_flag_shop">
+			<input type="button" class="button_pos" value="50💰" onclick="buy(50, 'no_flag')">
+		</div>
+		<br>
+		<div id="noric_cnvel_shop">
+			<input type="button" class="button_pos" value="100💰" onclick="buy(100, 'noric_cnvel')">
+		</div>
+
+	</div>
 	<div id="you_lose">
 		<span id="you_lose_back"></span>
-		<span id="coin_lose">0 coin</span>
+		<span id="coin_lose">0💰</span>
 		<input type="button" value="Try Again" onclick="$('#you_lose').hide(); start()">
 	</div>
 	<script src="js.js"></script>

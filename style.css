@@ -247,3 +247,138 @@ table span{
     bottom: 50%;
     transform: translateY(10px);
 }
+#coin_value{
+	position: absolute;
+    left: 4px;
+    top: 13px;
+}
+#shop_page{
+	width: 100%;
+}
+.tools{
+	position: absolute;
+    left: 39px;
+    height: 175px;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.tools div{
+	width: 50px;
+    height: 48px;
+    background-size: 100%;
+    border: 1px solid black;
+    z-index: 4;
+    cursor: pointer;
+}
+.metal{
+	background-image: url(bomb_search.png);
+	background-position: center;
+}
+.no_flag{
+	background-image: url("no_flag.png");
+}
+.noric_cnvel2{
+	background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/View-refresh.svg/2048px-View-refresh.svg.png");
+}
+#shop{
+	background-image: url("shop.png");
+}
+#shop_page{
+	display: none;
+	width: 600px;
+	height: 400px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
+	background-color: gray;
+	overflow-y: auto;
+}
+#close{
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	cursor: pointer;
+	z-index: 5;
+}
+
+#akcia{
+	height: 300px;
+	background-image: url("https://img.freepik.com/premium-photo/radial-background-halftones-high-speed-abstract-lines_250994-2126.jpg");
+	border-radius: 10px 10px 0px 0px;
+	position: relative;
+}
+#akcia div{
+	width: 202px;
+    height: 196px;
+    background-size: 100%;
+    position: absolute;
+    background-position: bottom;
+    background-size: 100%, 35px;
+    background-repeat: no-repeat;
+    background-position: bottom, right bottom;
+}
+#akcia .metal{
+	left: 23px;
+    top: 27px;
+    background-image: url(bomb_search.png), url("ereq.png");
+    background-position: bottom, center bottom;
+}
+#akcia .no_flag{
+	left: 193px;
+    top: 45px;
+    background-image: url(no_flag.png), url("ereq.png");
+    background-position: center, right bottom;
+}
+#akcia .noric_cnvel{
+	top: 41px;
+    right: 15px;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/View-refresh.svg/2048px-View-refresh.svg.png"), url("ereq.png");
+}
+.button_pos{
+	width: 73px;
+    height: 39px;
+    position: absolute;
+    bottom: 9px;
+    right: 10px;
+    cursor: pointer;
+}
+#metal_shop, #no_flag_shop, #noric_cnvel_shop{
+	height: 150px;
+	background-color: white;
+	border: 1px solid black;
+	position: relative;
+	background-size: 176px, cover;
+    background-position: center,2px 441px;
+    background-repeat: no-repeat, repeat;
+}
+#metal_shop{
+	background-image: url(bomb_search.png), url(https://img.freepik.com/premium-vector/black-bomb-vector-illustration-with-sunburst-background-cartoon-bomb_113494-240.jpg);
+}
+#no_flag_shop{
+	background-image: url(no_flag.png), url("https://static.vecteezy.com/system/resources/previews/004/223/162/original/dirty-grunge-hand-drawn-with-brush-strokes-cross-x-illustration-isolated-on-white-background-mark-graphic-design-check-mark-symbol-no-button-for-vote-in-check-box-web-etc-free-vector.jpg");
+}
+#noric_cnvel_shop{
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/View-refresh.svg/2048px-View-refresh.svg.png), url(heart.png);
+    background-size: 176px, 310px;
+    background-position: center,121px 451px;
+}
+.border-left{
+	border-left: 3px solid black;
+}
+.border-right{
+	border-right: 3px solid black;
+}
+.border-top{
+	border-top: 3px solid black;
+}
+.border-bottom{
+	border-bottom: 3px solid black;
+}
