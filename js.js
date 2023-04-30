@@ -3,7 +3,7 @@ var level="easy"
 var record = 999
 var coin = 9999
 var no_flag = 0
-var metal_search = 0
+var metal_search = 99999
 var noric_cnvel = 0
 var use_tools = false
 var map =[]
@@ -50,12 +50,7 @@ function start(){
 	}
 	update()
 function flag(){
-	var stugel_flag_length=0
-	for (var i=0; i < $("button").length; i++){
-		if (($("button")[i]).children[0].innerText=="🚩"){
-			stugel_flag_length++
-		}
-	}
+	var stugel_flag_length = $('button').find('p:contains("🚩")').length
 	bomblength-stugel_flag_length!=flaglength?flaglength=bomblength - stugel_flag_length:""
 	delete stugel_flag_length
 	h.removeClass()
@@ -75,7 +70,7 @@ function update(){
 		e.preventDefault()
 		if (stop_game==false && use_tools ==false){
 			if ((e.srcElement.localName=="button" && $(`.${e.target.className}`).children("p").html() !="🚩")||(e.srcElement.localName=="p"&&e.srcElement.innerHTML !="🚩")){
-				if (e.srcElement.innerHTML[0]=="<"){
+				if (e.target.localName=="button"){
 					$(`.${e.target.className}`).children("p").html("🚩")
 				}
 				else{
@@ -84,15 +79,13 @@ function update(){
 				flaglength--
 			}
 			else{
-
-				if (e.srcElement.innerHTML[0]=="<"  && e.srcElement.innerHTML[1] !="b"){
+				if (e.target.localName=="button"){
 					$(`.${e.target.className}`).children("p").html("")
-					flaglength++
 				}
-				else if(e.target.localName !="td" && e.target.localName !="span"){
+				else if(e.target.localName=="p"){
 					e.srcElement.innerHTML=""
-					flaglength++
 				}
+				flaglength++
 			}
 			flag()
 		}
@@ -119,17 +112,17 @@ function update(){
 		number_generate()
 		delete ok, error, rand1, rand2
 	}
-var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
+var method=[[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 // number generate
 	function number_generate(){
 		var qani=0
 		for (var i=0; i<map.length; i++){
 			for (var i2=0; i2 < map[0].length; i2++){
 				if (map[i][i2] !="💣") {
-					for (var i3 = 1; i3 <= 8; i3++) {
-						try{map[i+method[i3][0]][i2+method[i3][1]]=="💣"?qani++ :""}
+					method.forEach(function(item){
+						try{map[i+item[0]][i2+item[1]]=="💣"?qani++ :""}
 						catch{}
-					}
+					})
 					map[i][i2]=qani==0 ?"":qani
 					qani=0
 				}
@@ -143,15 +136,14 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 	function empty(a, a2){
 		try{
 			if (map[a][a2]==""){
-				for (var i=0; i < method.length; i++){
+				method.forEach(function(item){
 					try{
-						if ((map[a + method[i][0]][a2 + method[i][1]] !="💣" && $(`.${a + method[i][0]}y${a2 + method[i][1]}`).children("p")[0].innerText !="🚩")){
-							$(`.${a+ method[i][0]}y${a2+ method[i][1]}`).hide()
-							$(`.${a+ method[i][0]}x${a2+ method[i][1]}`).html(`<span class="color_${map[a + method[i][0]][a2+ method[i][1]]}">${map[a+ method[i][0]][a2+ method[i][1]]}</span>`)
-							map[a + method[i][0]][a2 + method[i][1]]==""?()=>{arr +=[[a + method[i][0]], [a2 + method[i][1]]]}:""
-						}
-					}catch{}
-				}
+						var ai = a+item[0]
+						var a2i = a2+item[1]
+						map[ai][a2i]!="💣"&&$(`.${ai}y${a2i}`).innerText!="🚩"?$(`.${ai}x${a2i}`).html(`<span class="color_${map[ai][a2i]}">${map[ai][a2i]}</span>`):""
+					}
+					catch{}
+				})
 				kanchel==true ? kanchi(a, a2) : "";
 			}
 		}catch{}
@@ -194,21 +186,17 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 				$(`.${eval(a)+method[i][0]}y${eval(b)+method[i][1]}`).children("p")[0].innerText=="🚩"?calc++:''
 			}catch{}
 		}
-		if (calc==eval(t[0].innerText)){
-			for (var i=0;i<method.length;i++){
+		if (calc==eval(t[0].innerText)) {
+			method.forEach(function(item){
 				try{
-					if($(`.${eval(a)+eval(method[i][0])}y${eval(b)+eval(method[i][1])}`).children("p")[0].innerText !="🚩"){
-						$(`.${eval(a)+eval(method[i][0])}y${eval(b)+eval(method[i][1])}`).hide()
-						$(`.${eval(a)+eval(method[i][0])}x${eval(b)+eval(method[i][1])}`).html(`<span class="color_${map[eval(a)+eval(method[i][0])][eval(b)+eval(method[i][1])]}">${map[eval(a)+eval(method[i][0])][eval(b)+eval(method[i][1])]}</span>`)
-						if (map[eval(a)+eval(method[i][0])][eval(b)+eval(method[i][1])]=="💣"){
-							game_over()
-						}
-						else if (map[eval(a)+eval(method[i][0])][eval(b)+eval(method[i][1])]==""){
-							empty(eval(a)+eval(method[i][0]),eval(b)+eval(method[i][1]))
-						}
-					}
-				}catch{}
-			}
+					var ai = eval(a)+item[0]
+					var a2i = eval(b)+item[1]
+					var map_loc = map[ai][a2i]
+					map_loc==""&&$(`.${ai}y${a2i}`)[0].innerText!="🚩"?$(`.${ai}y${a2i}`).click():""
+					map_loc!="💣"&&$(`.${ai}y${a2i}`)[0].innerText!="🚩"?$(`.${ai}x${a2i}`).html(`<span class="color_${map_loc}">${map_loc}</span>`):map_loc=="💣"&&$(`.${ai}y${a2i}`)[0].innerText!="🚩"?game_over():""
+				}
+				catch{}
+			})
 		}
 		stugel_haxtec()
 	}
@@ -308,7 +296,6 @@ var method=[[0,0],[1,1],[-1,-1],[1,-1],[-1,1],[0,1],[0,-1],[1,0],[-1,0]]
 	function stugel_haxtec(){
 		if (map.length){
 			if (stop_game==false && $("td button").length==bomblength){
-				set(2)
 				set(1)<record?record=set(1):''
 				$("#record").html(`YOUR RECORD: ${record}s`)
 				$("#score").html(`YOUR SCORE: ${set(1)}s`)
@@ -373,9 +360,9 @@ function akcia_buy(){
 
 function up_coin(){
 	$("#coin_value").html(`${coin}💰`)
-	no_flag == 0 ?$(".tools .no_flag").css('filter', " grayscale(100%)"):$(".tools .no_flag").css('filter', " grayscale(0%)")
-	metal_search == 0 ?$(".tools .metal").css('filter', " grayscale(100%)"):$(".tools .metal").css('filter', " grayscale(0%)")
-	noric_cnvel == 0 ?$(".tools .noric_cnvel2").css('filter', " grayscale(100%)"):$(".tools .noric_cnvel2").css('filter', " grayscale(0%)")
+	no_flag == 0 ?$(".tools .no_flag").addClass("grayscale"):$(".tools .no_flag").removeClass("grayscale")
+	metal_search == 0 ?$(".tools .metal").addClass("grayscale"):$(".tools .metal").removeClass("grayscale")
+	noric_cnvel == 0 ?$(".tools .noric_cnvel2").addClass("grayscale"):$(".tools .noric_cnvel2").removeClass("grayscale")
 }
 function buy(price, add){
 	if (coin>=price) {
@@ -459,15 +446,16 @@ $(".no_flag").click(function(){
 	var time = 0
 	var timer = 0
 	function set(a){
-		if (a==0&&timer==0) {
+		if ((a==0)||a==1) {
+			if (a==1) {
+				clearInterval(time)
+				return timer;
+			}
 			timer = 0
 			time = setInterval(function(){
 				timer == 999 ? clearInterval(time) : '';
 				timer++;
 			}, 1000)
+			set(2)
 		}
-		if (a == 1) {
-			return timer;
-		}
-		a==2?clearInterval(time):''
 	}
